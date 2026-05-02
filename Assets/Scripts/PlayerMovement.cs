@@ -2,8 +2,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour {
+
+    [SerializeField] private float moveSpeed = 250f;
     private Vector2 moveInput;
-    private float moveSpeed = 5f;
     private Rigidbody2D rb;
 
     void Start(){
@@ -15,7 +16,7 @@ public class PlayerMovement : MonoBehaviour {
         moveInput = context.ReadValue<Vector2>();
     }
 
-    void Update() {
-        rb.linearVelocity = moveInput * moveSpeed;
+    void FixedUpdate() {
+        rb.linearVelocityY = moveInput.y * moveSpeed * Time.deltaTime;
     }
 }
