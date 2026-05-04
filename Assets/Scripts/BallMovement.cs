@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class BallMovement : MonoBehaviour
 {
-    private float _speedX = -5f;
-    private float _speedY = 5f;
+    private float _speedX = -9f;
+    private float _speedY = 9f;
     private Rigidbody2D rb;
     private Collider2D cl;
+    private ScoreManager scoreManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        
+        scoreManager = FindAnyObjectByType<ScoreManager>();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -31,11 +32,13 @@ public class BallMovement : MonoBehaviour
         {
             Debug.Log("Goal from the Opponent");
             transform.position = new Vector2(0, 0);
+            scoreManager.addOpponentScore();
         }
         else if(collision.transform.gameObject.name == "OpponentGoal")
         {
             Debug.Log("Goal from the Player");
             Destroy(gameObject);
+            scoreManager.addPlayerScore();
         }
         else
         {

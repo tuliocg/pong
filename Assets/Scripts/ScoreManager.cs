@@ -1,24 +1,23 @@
-using UnityEditor.Search;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
-    public Text playerScoreText;
-    public Text opponentScoreText;
+    [SerializeField] private TMP_Text playerScoreText;
+    [SerializeField] private TMP_Text opponentScoreText;
 
     private int playerScore = 0;
     private int opponentScore = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void addPlayerScore()
     {
-        playerScoreText.text = playerScore.ToString() + "point(s)";
-        opponentScoreText.text = opponentScore.ToString() + "point(s)";
+        playerScore++;
+        playerScoreText.SetText(playerScore.ToString());
     }
 
-    // Update is called once per frame
-    void Update()
+    public void addOpponentScore()
     {
-        
+        opponentScore++;
+        opponentScoreText.SetText(opponentScore.ToString());
     }
 }
